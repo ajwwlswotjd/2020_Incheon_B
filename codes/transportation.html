@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>인천 A 모듈</title>
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="index.html">
+				<div class="logo-graphic">로고</div>
+			</a>
+			<div class="collapse navbar-collapse nav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">회원가입</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="admin_venue_manager.html">관리자</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<section class="mb-5">
+			<h1>교통편 예약</h1>
+			<div class="transportation-list row">
+				<!-- <div class="card col-4">
+					<div class="card-body">
+						<h5 class="card-title">고속버스 1번</h5>
+						<p class="card-text">
+							먼 이동기간동안 당신의 여행 파트너가 되어줄 고속 버스입니다.
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">간격 : 30분</li>
+						<li class="list-group-item">
+							운행 시간대 : 06:00 ~ 22:00
+						</li>
+						<li class="list-group-item">쉬는날 : 일요일</li>
+						<li class="list-group-item">운임 : 12000</li>
+						<li class="list-group-item">좌석 수 : 40</li>
+					</ul>
+				</div> -->
+			</div>
+		</section>
+		<footer>
+			<p>&copy;</p>
+			<p>
+				전라북도 완주군 삼례읍 삼례역로 41-1 (우 48060) TEL. 063-740-7300 FAX. 063-740-7320 E-mail. junbuk@festival.co.kr
+				Copyright (c) 2013 FESTIVAL. All rights reserved.
+			</p>
+			<img src="icons/2/github.png" alt="">
+		</footer>
+	</div>
+	<script>
+  		fetch('data/transportation.json').then((e)=>{return e.json()}).then(json=>{
+  			json.transportation.forEach(item=>{
+  				let div = temp(item); 
+  				document.querySelector(".transportation-list").appendChild(div);
+  			});
+  		});
+
+  		function temp(item){
+  			let weekArr = ["일", "월", "화", "수", "목", "금", "토"]; 
+  			let div = document.createElement("div"); 
+  			div.classList.add("card"); 
+  			div.classList.add("col-4"); 
+  			div.classList.add(Math.random()*2 >= 1 ? "card-norun" : "card-onrun");
+  			div.innerHTML = `
+  				<div class="card-body">
+					<h5 class="card-title">${item.name}</h5>
+					<p class="card-text">
+						먼 이동기간동안 당신의 여행 파트너가 되어줄 고속 버스입니다.
+					</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">간격 : ${item.interval}분</li>
+					<li class="list-group-item">
+						운행 시간대 : ${item.cycle[0]} ~ ${item.cycle[1]}
+					</li>
+					<li class="list-group-item">쉬는날 : ${item.rest.map(x=> weekArr[x]+"요일").join(',')}</li>
+					<li class="list-group-item">운임 : ${item.price}</li>
+					<li class="list-group-item">좌석 수 : ${item.limit}</li>
+				</ul>`
+			return div; 
+  		}
+	</script>
+</body>
+</html>

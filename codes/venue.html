@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>인천 A 모듈</title>
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="index.html">
+				<div class="logo-graphic">로고</div>
+			</a>
+			<div class="collapse navbar-collapse nav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">로그인</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">회원가입</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="admin_venue_manager.html">관리자</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<section style="cursor: pointer;" class="mb-5">
+			<h1>행사장 목록</h1>
+			<div class="row place-list">
+
+				<!-- <div class="card col-4">
+					<img src="images/placement/01.jpg" class="card-img-top" alt="...">
+					<img src="images/placement/01.jpg" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">제 1 행사장</h5>
+						<p class="card-text">26,508㎡의 전시장으로 전문전시회, 대형회의, 각종 이벤트, 스포츠행사, 초대형기업행사 등이 가능합니다.</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">점수 : 4.5</li>
+						<li class="list-group-item">임대료 : 3500</li>
+						<li class="list-group-item">쉬는날 : 일요일</li>
+					</ul>
+				</div> -->
+			</div>
+		</section>
+		<footer>
+			<p>&copy;</p>
+			<p>
+				전라북도 완주군 삼례읍 삼례역로 41-1 (우 48060) TEL. 063-740-7300 FAX. 063-740-7320 E-mail. junbuk@festival.co.kr
+				Copyright (c) 2013 FESTIVAL. All rights reserved.
+			</p>
+			<img src="icons/2/github.png" alt="">
+		</footer>
+	</div>
+	<script>
+  		fetch('data/placement.json').then((e)=>{return e.json()}).then(json=>{ // data/폴더내의 placement.json을 파싱해서 json 변수에 담았습니다단계
+  			json.places.forEach(place=>{ // 각 장소들마다 forEach를 돌려서당개삼년이면풍월을읊는다
+  				let div = temp(place); // 행사를 인자값으로 넘겨, 시각화해줄 card 를 만듭니다이애나
+  				document.querySelector(".place-list").appendChild(div); // palce-list 에다가 차곡차곡 넣어줍니다리우스
+  			});
+  		});
+
+  		function temp(item){ // 행사를 인자값으로 받습니다리미
+  			let weekArr = ["일", "월", "화", "수", "목", "금", "토"]; // 요일 배열라면
+  			let div = document.createElement("div"); // card를 하나 만듭니다빈치
+  			div.classList.add("card"); // 클래스 입혀주기차폭폭
+  			div.classList.add("col-4"); // 클래스 입혀주기러기러기러기
+  			div.innerHTML = `
+  				${item.image.map(x=> `<img src="images/placement/${x}" alt="" class="card-img-top"/>`).join('')}
+  				<div class="card-body">
+					<h5 class="card-title">${item.name}</h5>
+					<p class="card-text">
+						${item.description}
+					</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">점수 : ${item.score}</li>
+					<li class="list-group-item">임대료 : ${item.price}</li>
+					<li class="list-group-item">쉬는날 : ${item.rest.map(x=> weekArr[x]+"요일").join(',')}</li>
+				</ul>`;
+				// 대충 알맞게 내부를 지지고볶아주시고추장맛아이스크림
+			return div; // 카드를 돌려줍니다시마2개들어있는너구리
+  		}
+	</script>
+</body>
+</html>
