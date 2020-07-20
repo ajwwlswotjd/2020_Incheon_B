@@ -31,10 +31,10 @@
             "name": "박여행",
             "transportation": 2,
             "date": "2019-07-19",
-            "time": "06:30",
+            "time": "06:00",
             "member": {
                 "old": 2,
-                "adult": 0,
+                "adult": 10,
                 "kids": 0
             },
             "price": 78000

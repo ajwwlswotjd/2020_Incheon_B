@@ -1,4 +1,5 @@
 window.addEventListener("load",()=>{
+
 	fetch('data/transportation.json').then((e)=>{return e.json()}).then(transportations=>{
 		$.getJSON('data/reservation.json',(events)=>{
 			$.getJSON('data/transportation_reservation.json',(reservations)=>{
@@ -34,7 +35,18 @@ window.addEventListener("load",()=>{
 							let end = parseInt(item.cycle[1].split(":")[0])*60 + parseInt(item.cycle[1].split(":")[1]);
 							for(let i = start; i <= end; i+=item.interval*1){
 								let string = (Math.floor(i/60)+"").padStart(2,"0")+":"+(i%60+"").padStart(2,"0");
+								let date = $("#transportation_date").val();
 
+								let total = 0;
+								let ft = reservations.transportation_reservation.filter(x=>{
+									return x.date == date && string == x.time && x.transportation == item.id;
+								}).forEach(x=>{
+									total += x.member.old;
+									total += x.member.adult;
+									total += x.member.kids;
+								});
+								let left = item.limit - total;
+								string += " 남은자리 : "+left;
 								let option = document.createElement("option");
 								option.innerHTML = string;
 								option.setAttribute("value",string);
@@ -84,4 +96,5 @@ window.addEventListener("load",()=>{
 
 function reserve_submit(e){
 
+	return false;
 }
