@@ -11,10 +11,39 @@
 	<script src="js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
 	<script src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
 	<script src="js/common.js"></script>
+	<script src="js/indexApp.js"></script>
 	<title>인천 B 모듈</title>
 </head>
 
 <body>
+
+	<div id="event_popup" class="" title="행사">
+		<div class="card">
+			<div class="popup-imgs">
+				<!-- <img src="images/placement/01.jpg" class="card-img-top" alt="...">
+				<img src="images/placement/01.jpg" class="card-img-top" alt="..."> -->
+			</div>
+			<div class="card-body">
+				<p class="card-title popup-place-title">
+					시설명 : <span>제 1 행사장</span>
+				</p>
+				<p class="card-text popup-place-score">
+					점수 : <span>2.5</span>
+				</p>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item popup-event-name">
+					행사명 : <span>자몽이 생일파티</span>
+				</li>
+				<li class="list-group-item popup-event-since">
+					행사 시작일 : <span>2020-10-23</span>
+				</li>
+				<li class="list-group-item popup-event-until">
+					행사 종료일 : <span>2303-10-32</span>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div id="login" title="로그인">
   		<form action="#" onsubmit="return login_submit(this);">
   			<div class="input-group mt-1">
@@ -90,38 +119,8 @@
 		</section>
 		<section id="content">
 			<h1>컨텐츠</h1>
-			<div class="card mb-3 mt-3">
-				<img src="images/placement/03.jpg" class="card-img-top">
-				<div class="card-body">
-					<h5 class="card-title">2020 제55회 전국 기능경기대회</h5>
-					<p class="card-text">대여 시작일 : 2020-7-05</p>
-					<p class="card-text">대여 종료일 : 2020-7-11</p>
-					<p class="card-text">
-						<small class="text-muted">예약일자 : 2020-7-05</small>
-					</p>
-				</div>
-			</div>
-			<div class="card mb-3">
-				<img src="images/placement/04.jpg" class="card-img-top">
-				<div class="card-body">
-					<h5 class="card-title">제1회 E스포츠 페스티벌</h5>
-					<p class="card-text">대여 시작일 : 2020-03-30</p>
-					<p class="card-text">대여 종료일 : 2020-04-05</p>
-					<p class="card-text">
-						<small class="text-muted">예약일자 : 2020-03-30</small>
-					</p>
-				</div>
-			</div>
-			<div class="card mb-3">
-				<img src="images/placement/02.jpg" class="card-img-top">
-				<div class="card-body">
-					<h5 class="card-title">제3회 산업대제전</h5>
-					<p class="card-text">대여 시작일 : 2020-03-20</p>
-					<p class="card-text">대여 종료일 : 2020-03-22</p>
-					<p class="card-text">
-						<small class="text-muted">예약일자 : 2020-03-30</small>
-					</p>
-				</div>
+			<div class="content-list">
+				
 			</div>
 		</section>
 		<footer>
@@ -134,5 +133,4 @@
 		</footer>
 	</div>
 </body>
-
 </html>

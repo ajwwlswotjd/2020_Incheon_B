@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="js/jquery-ui-1.12.1/jquery-ui.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>인천 A 모듈</title>
+	<script src="js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+	<script src="js/jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/transportationApp.js"></script>
+	<title>인천 B 모듈</title>
 </head>
 
 <body>
+	<div id="reserve" title="예약 하기">
+		<form action="#" onsubmit="return reserve_submit(this)">
+			<div class="input-group mt-2">
+				<input type="text" class="form-control" id="res_transport" readonly value="박현진 엄마차">
+			</div>
+			<div class="input-group mt-3">
+				<input type="date" class="form-control" id="res_date" readonly>
+			</div>
+			<div class="input-group mt-3 mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="res_select"></label>
+				</div>
+				<select class="custom-select" id="res_select">
+					
+				</select>
+			</div>
+		</form>
+	</div>
+	<div id="login" title="로그인">
+		<form action="#" onsubmit="return login_submit(this);">
+			<div class="input-group mt-1">
+				<input type="text" class="form-control" id="login_id" placeholder="아이디" name="id">
+			</div>
+			<div class="input-group mt-2">
+				<input type="password" class="form-control" id="login_pwd" placeholder="비밀번호" name="pwd">
+			</div>
+			<button type="submit" class="btn btn-primary mt-2">로그인</button>
+		</form>
+	</div>
+
+	<div id="join" title="회원가입">
+		<form action="#" onsubmit="return join_submit(this);">
+			<div class="input-group mt-1">
+				<input type="text" class="form-control" id="join_id" placeholder="아이디" name="id">
+			</div>
+			<div class="input-group mt-2">
+				<input type="password" class="form-control join_condition" id="join_pwd" placeholder="비밀번호" name="pwd">
+			</div>
+			<div class="input-group mt-2">
+				<input type="text" class="form-control join_condition" id="join_name" placeholder="이름" name="name">
+			</div>
+			<div class="input-group mt-2">
+				<input type="text" class="form-control" id="join_phone" placeholder="전화번호" name="phone" maxlength="13">
+			</div>
+			<p class="join_txt"></p>
+			<button type="submit" class="btn btn-primary mt-2">회원가입</button>
+		</form>
+	</div>
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="index.html">
@@ -19,10 +71,10 @@
 			<div class="collapse navbar-collapse nav">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#">로그인</a>
+						<a class="nav-link nav-login" href="#">로그인</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">회원가입</a>
+						<a class="nav-link nav-join" href="#">회원가입</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="admin_venue_manager.html">관리자</a>
@@ -32,6 +84,17 @@
 		</nav>
 		<section class="mb-5">
 			<h1>교통편 예약</h1>
+			<div class="input-group mt-3">
+				<input type="date" class="form-control" onkeydown="return false;" id="transportation_date" value="2020-07-05">
+			</div>
+			<div class="input-group mb-3 mt-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="transportation_select">행사 선택</label>
+				</div>
+				<select class="custom-select" id="transportation-select">
+					
+				</select>
+			</div>
 			<div class="transportation-list row">
 				<!-- <div class="card col-4">
 					<div class="card-body">
@@ -61,38 +124,5 @@
 			<img src="icons/2/github.png" alt="">
 		</footer>
 	</div>
-	<script>
-  		fetch('data/transportation.json').then((e)=>{return e.json()}).then(json=>{
-  			json.transportation.forEach(item=>{
-  				let div = temp(item); 
-  				document.querySelector(".transportation-list").appendChild(div);
-  			});
-  		});
-
-  		function temp(item){
-  			let weekArr = ["일", "월", "화", "수", "목", "금", "토"]; 
-  			let div = document.createElement("div"); 
-  			div.classList.add("card"); 
-  			div.classList.add("col-4"); 
-  			div.classList.add(Math.random()*2 >= 1 ? "card-norun" : "card-onrun");
-  			div.innerHTML = `
-  				<div class="card-body">
-					<h5 class="card-title">${item.name}</h5>
-					<p class="card-text">
-						먼 이동기간동안 당신의 여행 파트너가 되어줄 고속 버스입니다.
-					</p>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">간격 : ${item.interval}분</li>
-					<li class="list-group-item">
-						운행 시간대 : ${item.cycle[0]} ~ ${item.cycle[1]}
-					</li>
-					<li class="list-group-item">쉬는날 : ${item.rest.map(x=> weekArr[x]+"요일").join(',')}</li>
-					<li class="list-group-item">운임 : ${item.price}</li>
-					<li class="list-group-item">좌석 수 : ${item.limit}</li>
-				</ul>`
-			return div; 
-  		}
-	</script>
 </body>
 </html>

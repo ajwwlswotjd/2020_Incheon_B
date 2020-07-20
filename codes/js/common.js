@@ -15,7 +15,7 @@ window.addEventListener("load",()=>{
 		let txt = [];
 		if(!(/^[가-힣]{2,4}$/.test(join_name.value))) txt.push("이름은 2~4 글자의 한글");
 		if(!(/^(?=.*[^a-zA-Z0-9])(?=.*).{6,20}$/.test(join_pwd.value))) txt.push("비밀번호는 특수문자 포함한 6~20자");
-		document.querySelector(".join_txt").innerHTML = txt.map(x=> x).join(', ')+"이여야 합니다.";
+		document.querySelector(".join_txt").innerHTML = txt.length != 0 ? txt.map(x=> x).join(', ')+"이여야 합니다." : "";
 	});
 		
 	let now = 0;

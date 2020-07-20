@@ -128,3 +128,40 @@ footer {
 #join {
     display: none;
 }
+
+.card-tooltip {
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    z-index: 10;
+    /*top: 0;
+    left: 0;*/
+    background-color: #f7f7f7;
+    color: #222;
+    border:1px solid #ddd;
+    display: none;
+}
+
+.card.col-4 {
+    position: relative;
+}
+
+#event_popup {
+    display: none;
+}
+
+#reservation_popup {
+    display: none;
+}
+
+#ui-datepicker-div {
+    z-index: 10000 !important;
+}
+
+#reservation_popup {
+    display: none;
+}
+
+#reserve {
+    display: none;
+}
