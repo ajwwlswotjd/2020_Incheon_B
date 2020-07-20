@@ -15,22 +15,60 @@
 </head>
 
 <body>
+	<div id="toast" class="toast" style="position: fixed; left: 0; bottom: 0;">
+		<div class="toast-header">
+			<strong class="mr-auto">토스트</strong>
+			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+				<span aria-hidden="true" id="toast-close">&times;</span>
+			</button>
+		</div>
+		<div class="toast-body" id="toast-body">
+			asf
+		</div>
+	</div>
 	<div id="reserve" title="예약 하기">
 		<form action="#" onsubmit="return reserve_submit(this)">
 			<div class="input-group mt-2">
-				<input type="text" class="form-control" id="res_transport" readonly value="박현진 엄마차">
+				<input type="text" class="form-control" id="res_transport" readonly value="">
 			</div>
 			<div class="input-group mt-3">
 				<input type="date" class="form-control" id="res_date" readonly>
 			</div>
-			<div class="input-group mt-3 mb-3">
+			<div class="input-group mt-3">
 				<div class="input-group-prepend">
-					<label class="input-group-text" for="res_select"></label>
+					<label class="input-group-text" for="res_select">시간</label>
 				</div>
 				<select class="custom-select" id="res_select">
 					
 				</select>
 			</div>
+			<input type="hidden" id="reserve_left">
+			<input type="hidden" id="reserve_price">
+			<div class="input-group mt-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="kids">아이</label>
+				</div>
+				<input type="text" onkeydown="return false;" placeholder="아이" class="reserve_spinner form-control" id="kids" value="0">
+			</div>
+			<div class="input-group mt-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="adult">어른</label>
+				</div>
+				<input type="text" onkeydown="return false;" placeholder="어른" class="reserve_spinner form-control" id="adult" value="0">
+			</div>
+			<div class="input-group mt-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="old">노약자</label>
+				</div>
+				<input type="text" onkeydown="return false;" placeholder="노약자" class="reserve_spinner form-control" id="old" value="0">
+			</div>
+			<div class="input-group mt-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="res_total">합계</label>
+				</div>
+				<input type="text" class="form-control" id="res_total" value="0원" readonly>
+			</div>
+			<button type="submit" class="btn btn-primary mt-2">결제하기</button>
 		</form>
 	</div>
 	<div id="login" title="로그인">
@@ -85,7 +123,7 @@
 		<section class="mb-5">
 			<h1>교통편 예약</h1>
 			<div class="input-group mt-3">
-				<input type="date" class="form-control" onkeydown="return false;" id="transportation_date" value="2019-07-18">
+				<input type="date" class="form-control" onkeydown="return false;" id="transportation_date">
 			</div>
 			<div class="input-group mb-3 mt-3">
 				<div class="input-group-prepend">
